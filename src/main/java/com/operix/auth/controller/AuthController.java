@@ -21,9 +21,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Autenticação", description = "Endpoints de login e registro de usuários")
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -39,6 +43,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")    
+    @Operation(summary = "Autentica o usuário", description = "Recebe credenciais e retorna token JWT")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         
         UsernamePasswordAuthenticationToken userAndPass = new UsernamePasswordAuthenticationToken(request.email(), request.password());
@@ -50,6 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Registra o usuário", description = "Cria um novo usuário no sistema")
     public ResponseEntity<RegisterUserResponse> register(@Valid @RequestBody RegisterUserRequest request) {
         User newUser = new User();
         newUser.setName(request.name());
