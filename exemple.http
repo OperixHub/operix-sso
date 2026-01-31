@@ -1,0 +1,24 @@
+
+### Registro
+POST http://localhost:8080/api/v1/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "João Pedro",
+    "email": "joao@teste.com",
+    "password": "27072001"
+}
+
+### Login
+POST http://localhost:8080/api/v1/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "joao@teste.com",
+    "password": "27072001"
+}
+
+### 
+GET http://localhost:8080/api/v1/users/ HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInN1YiI6ImpvYW9AdGVzdGUuY29tIiwiZXhwIjoxNzY5OTYyNzkwfQ.GPiFWpe2T2Vwc4Vwec7e1V1Vo8MvuQ7QF3_I39G_L3w

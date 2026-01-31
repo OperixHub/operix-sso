@@ -25,23 +25,24 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configure(http))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(authorize -> authorize
-                .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                .anyRequest().authenticated())
-            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-            .build();
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configure(http))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorize -> authorize
+                        .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/register").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
