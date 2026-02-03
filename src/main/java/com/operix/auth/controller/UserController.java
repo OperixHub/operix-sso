@@ -26,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     @Operation(summary = "Lista todos os usuários", description = "Retorna todos os usuários")
     public ResponseEntity<ApiResponse<List<User>>> getAllUsers() {
         List<User> users = userService.findAll();
