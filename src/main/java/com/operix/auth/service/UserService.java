@@ -21,7 +21,6 @@ public class UserService {
 
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("USER");
         user.setActive(true);
         return userRepository.save(user);
     }
