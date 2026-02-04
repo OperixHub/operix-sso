@@ -1,4 +1,4 @@
-package com.operix.auth.config;
+package com.operix.auth.config.security;
 
 import java.io.IOException;
 import java.util.Optional;

@@ -16,8 +16,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
-public class User implements UserDetails {
+@Table(name = "superusers")
+public class Superuser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,6 @@ public class User implements UserDetails {
     private String email;
 
     private String password;
-
-    private String role;
 
     private Boolean active;
 
@@ -76,3 +74,4 @@ public class User implements UserDetails {
         return true;
     }
 }
+
