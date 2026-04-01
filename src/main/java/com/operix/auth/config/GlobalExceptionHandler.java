@@ -47,7 +47,8 @@ public class GlobalExceptionHandler {
 
         @ExceptionHandler(RuntimeException.class)
         public ResponseEntity<ApiResponse<Object>> handleRuntime(RuntimeException ex, HttpServletRequest req) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error(ex.getMessage(), null));
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body(ApiResponse.error("Erro interno no servidor", null));
         }
 
 
