@@ -1,34 +1,30 @@
 package com.operix.auth.entity;
 
 import java.time.Instant;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "systems")
-public class System {
+@Table(name = "user_profile")
+public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
+    private String keycloakId;          // ID do usuário no Keycloak
+
     private String name;
 
-    private String uri;
+    private String email;
 
-    private Boolean active;
+    private Boolean active = true;      // status do perfil local (opcional)
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

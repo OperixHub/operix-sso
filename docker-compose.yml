@@ -3,21 +3,24 @@ services:
     image: postgres:14-alpine
     restart: always
     environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: root
-      POSTGRES_DB: operixauth
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-root}
+      POSTGRES_USER: ${DB_USERNAME:-root}
+      POSTGRES_DB: ${DB_DATABASE:-operixsso}
     ports:
       - 5432:5432
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  app:
-    build: .
-    depends_on:
-      - db
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.1
+    command: start-dev --import-realm
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
     ports:
       - "8080:8080"
-    restart: unless-stopped
+    volumes:
+      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
 
 volumes:
   db-data:
